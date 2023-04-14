@@ -8,7 +8,9 @@ const SidebarLogo = () => {
 
     return (
         //create styling and add twitter icon
-        <div className="
+        <div 
+        onClick={() => router.push("/")}
+        className="
           rounded-full
           h-14
           w-14
