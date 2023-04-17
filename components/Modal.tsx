@@ -1,5 +1,6 @@
 import { useCallback } from "react";
-
+import {AiOutlineClose} from "react-icons/ai";
+import Button from "./Button";
 
 //setup interface for modal props
 //Several are optional
@@ -85,18 +86,18 @@ const Modal: React.FC<ModalProps> = ({
             {/* Content */}
                 <div
                 className="
-                    h-full
-                    lg:h-auto
-                    border-0
-                    rounded-lg
-                    shadow-lg
-                    relative
-                    flex
-                    flex-col
-                    w-full
-                    bg-black
-                    outline-none
-                    focus:outline-none
+                h-full
+                lg:h-auto
+                border-0 
+                rounded-lg 
+                shadow-lg 
+                relative 
+                flex 
+                flex-col 
+                w-full 
+                bg-black 
+                outline-none 
+                focus:outline-none
                 "
                 >
             {/* Header */}
@@ -116,6 +117,36 @@ const Modal: React.FC<ModalProps> = ({
                     text-white">
                         {title}
                     </h3>
+                    {/* This button is the x button */}
+                    <button
+                    onClick={handleClose}
+                    className="
+                        p-1
+                        ml-auto
+                        border-0
+                        text-white
+                        hover:opacity-70
+                        transition
+                    "
+                    >
+                        <AiOutlineClose size={20} />
+                    </button>
+                    </div>
+                    {/* Body */}
+                    <div className="relative p-10 flex-auto">
+                        {body}
+                    </div>
+                    {/* Footer */}
+                    <div className="flex flex-col gap-2 p-10">
+                        <Button
+                        disabled={disabled} 
+                        label={actionLabel}
+                        secondary 
+                        fullWidth
+                        large
+                        onClick={handleSubmit}
+                        />
+                        {footer}
                     </div>
                 </div>
             </div>
