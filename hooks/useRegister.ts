@@ -2,19 +2,19 @@ import { create } from "zustand";
 
 //note zustand is a sate management library like redux
 //zustand makes it easy to control global state
-//Set up interface for LoginModalStore.
+//Set up interface for RegisterModalStore.
 //OnOpen and OnClose should be a type of function
-interface LoginModalStore {
+interface RegisterModalStore {
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
 };
 
 //create a hook to control login modal
-const useLoginModal = create<LoginModalStore>((set) => ({
-    isOpen: false,
+const useRegisterModal = create<RegisterModalStore>((set) => ({
+    isOpen: true,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false })
   }));
 
-  export default useLoginModal;
+  export default useRegisterModal;
