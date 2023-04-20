@@ -12,7 +12,7 @@ interface RegisterModalStore {
 
 //create a hook to control login modal
 const useRegisterModal = create<RegisterModalStore>((set) => ({
-    isOpen: true,
+    isOpen: false,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false })
   }));

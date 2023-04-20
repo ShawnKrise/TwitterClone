@@ -1,6 +1,6 @@
 import useLoginModal from "@/hooks/useLoginModal";
 import { useCallback, useState } from "react";
-import Input from "../input";
+import Input from "../Input";
 import Modal from "../Modal";
 import useRegisterModal from "@/hooks/useRegister";
 
@@ -15,6 +15,18 @@ const RegisterModal = () => {
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    //create onToggle to toggle on and off
+    const onToggle = useCallback(() => {
+        if (isLoading) {
+            return; 
+        }
+
+        registerModal.onClose();
+        LoginModal.onOpen();
+        //pass isLoading, registerModal, LoginModal...
+        //into dependancy array
+    }, [isLoading, registerModal, LoginModal]);
 
     //make useCallback async for try
     //async lets program start long running task while...
@@ -70,6 +82,23 @@ const RegisterModal = () => {
         </div>
     )
 
+    const footerContent = (
+        //make sure p and span have empty space at start of text
+        <div className="text-neutral-400 text-center mt-4">
+            <p> Already have an Account? 
+                <span
+                //pass onToggle here
+                onClick={onToggle}
+                className="
+                    text-white
+                    cursor-pointer
+                    hover:underline
+                "
+                > Sign in</span>
+            </p>
+        </div>
+    )
+
     return (
         <Modal 
         disabled={isLoading}
@@ -79,6 +108,7 @@ const RegisterModal = () => {
         onClose={registerModal.onClose}
         onSubmit={onSubmit}
         body={bodyContent}
+        footer={footerContent}
         />
     );
 }
