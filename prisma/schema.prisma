@@ -1,6 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+//we're using prisma schema to define application models and connect to our database
 generator client {
   provider = "prisma-client-js"
 }
@@ -42,8 +43,9 @@ model Post {
   likedIds           String[] @db.ObjectId
   image              String?
 
+//create relations for user
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+//users will have relation with posts, but they will also have a relationship with comments
   comments          Comment[]
 }
 
@@ -55,6 +57,7 @@ model Comment {
   userId             String @db.ObjectId
   postId             String @db.ObjectId
 
+//create relation for user and post
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
@@ -65,5 +68,6 @@ model Notification {
   userId             String @db.ObjectId
   createdAt          DateTime @default(now())
 
+//create relation for user
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
