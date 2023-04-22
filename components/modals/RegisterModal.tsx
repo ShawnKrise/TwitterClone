@@ -3,6 +3,9 @@ import { useCallback, useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
 import useRegisterModal from "@/hooks/useRegister";
+import axios from "axios";
+import { toast } from 'react-hot-toast';
+import { signIn } from "next-auth/react";
 
 const RegisterModal = () => {
     //make const LoginModal equal useLoginModal
@@ -35,51 +38,69 @@ const RegisterModal = () => {
         try {
             setIsLoading(true);
 
-        //ADD REGISTER & LOGIN HERE LATER
+    //set up await for axios
+        await axios.post('/api/register', {
+        email,
+        password,
+        username,
+        name,
+        });
         
+    //set up toast for successful account creation
+        toast.success('Account created.');
+
+    //use signIn to automatically sign in after...
+    //account is successfully created
+        signIn('credentials', {
+            email,
+            password,
+        });
+
         //close loginmodal
         registerModal.onClose();
         //if error occurs in our try block...
         //use catch to execute console log of error
+        //also display toast error
         } catch (error) {
             console.log(error);
+            toast.error('Something went wrong');
         //add another block after catch for finally
         } finally {
             setIsLoading(false);
         }
         //add loginmodal dependancy here
-    }, [registerModal]);
+        //added password username and name as well
+    }, [registerModal, password, username, name, email]);
 
     const bodyContent = (
         //style
         <div className="flex flex-col gap-4">
-            {/* inputs */}
-            <Input 
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                disabled={isLoading}
-            />
-            <Input 
-                placeholder="Name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                disabled={isLoading}
-            />
-             <Input 
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-                disabled={isLoading}
-            />
-            <Input 
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                disabled={isLoading}
-            />
-
-        </div>
+        <Input
+          disabled={isLoading}
+          placeholder={"Email"}
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+        />
+        <Input 
+          disabled={isLoading}
+          placeholder="Name" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+        />
+        <Input 
+          disabled={isLoading}
+          placeholder="Username" 
+          value={username} 
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input 
+          disabled={isLoading}
+          placeholder="Password" 
+          type="password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
     )
 
     const footerContent = (
