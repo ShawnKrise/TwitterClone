@@ -3,6 +3,8 @@ import { useCallback, useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
 import useRegisterModal from "@/hooks/useRegister";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 const LoginModal = () => {
     //make const LoginModal equal useLoginModal
@@ -30,12 +32,17 @@ const LoginModal = () => {
     //make useCallback async for try
     //async lets program start long running task while...
     //still being responsive to other events
-    const onSubmit = useCallback(async() => {
+    const onSubmit = useCallback(async () => {
         try {
-            setIsLoading(true);
-
-        //ADD LOGIN HERE LATER
+          setIsLoading(true);
+    
+          await signIn('credentials', {
+            email,
+            password,
+          });
         
+          toast.success('Logged in');
+
         //close loginmodal
         LoginModal.onClose();
         //if error occurs in our try block...
@@ -47,7 +54,7 @@ const LoginModal = () => {
             setIsLoading(false);
         }
         //add loginmodal dependancy here
-    }, [LoginModal]);
+    }, [LoginModal, email, password]);
 
     const bodyContent = (
         //style
@@ -61,6 +68,7 @@ const LoginModal = () => {
             />
             <Input 
                 placeholder="Password"
+                type='password'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 disabled={isLoading}
