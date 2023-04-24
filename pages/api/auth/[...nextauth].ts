@@ -16,7 +16,7 @@ export default NextAuth({
             password: { label: 'password', type: 'password' },
            },
            async authorize(credentials) {
-            //if credentials don't have password throw error
+            //if credentials don't have password throw error.
             if (!credentials?.email || !credentials?.password) {
                 throw new Error('Invalid credentials');
               }
