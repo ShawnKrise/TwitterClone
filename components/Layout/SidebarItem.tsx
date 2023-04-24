@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+import { useCallback } from "react";
 import { IconType } from "react-icons";
 
 //create interface, make onClick optional
@@ -16,11 +18,24 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
     icon: Icon,
     onClick
 }) => {
+    const router = useRouter();
+    //if on click override, otherwise use router to push href
+    const handleClick = useCallback(() => {
+        if (onClick) {
+          return onClick();
+        }
+
+        if (href) {
+        router.push(href)
+        }
+    }, [onClick, router, href]);
+
+
     return (
         //style div
         //Icons show up when screen is collapsed/mobile
         //Once mobile is established, make desktop div
-        <div className="flex flex-row items-center">
+        <div onClick={handleClick} className="flex flex-row items-center">
             <div
                 className="
                 relative
