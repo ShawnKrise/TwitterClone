@@ -1,6 +1,6 @@
 
 //create interface for ButtonProps
-//boolean- result that may have one of two possible values
+//boolean- result that may have one of two possible values (true or false)
 interface ButtonProps {
     label: string;
     secondary?: boolean;
