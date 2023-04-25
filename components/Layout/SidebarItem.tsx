@@ -7,7 +7,7 @@ import { IconType } from "react-icons";
 //create interface, make onClick optional
 interface SidebarItemProps {
     label: string;
-    href: string;
+    href?: string;
     icon: IconType
     onClick?: () => void;
     auth?: boolean;

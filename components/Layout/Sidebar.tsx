@@ -18,12 +18,14 @@ const Sidebar = () => {
           icon: BsHouseFill
         },
         {
+          //auth true so only logged in users can get here
           label: "Notifications",
           href: "/notifications",
           icon: BsBellFill,
           auth: true,
         },
         {
+          //auth true so only logged in users can get here
           label: "Profile",
           href: "/users/123",
           icon: FaUser,
