@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import UserBio from "@/components/users/UserBio";
 import UserHero from "@/components/users/UserHero";
 import useUser from "@/hooks/useUser";
 import { useRouter } from "next/router";
@@ -18,7 +19,7 @@ const UserView = () => {
     //if loading or there is no fetched user, return
     //Looks like this - isLoading || !fetchedUser
     //to test set to true or false instead
-    if (isLoading || !fetchedUser) {
+    if (false) {
         return (
             <div
             className="
@@ -39,6 +40,7 @@ const UserView = () => {
         {/* add header here plus show back arrow */}
             <Header showBackArrow label={fetchedUser?.name}/>
             <UserHero userId={userId as string} />
+            <UserBio  userId={userId as string} />
         </>
     );
 }
