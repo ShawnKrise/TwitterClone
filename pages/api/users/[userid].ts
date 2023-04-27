@@ -7,7 +7,7 @@ export default async function handler(
 ) {
     //if req method is not equal to get return response...
     //status 405 and end the call
-    if (req.method !=='GET') {
+    if (req.method !== 'GET') {
         return res.status(405).end();
     }
 

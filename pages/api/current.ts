@@ -1,4 +1,4 @@
-import ServerAuth from "@/libs/ServerAuth";
+import serverAuth from '@/libs/serverAuth';
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -11,7 +11,7 @@ export default async function handler(
     }
     //setup try and catch blocks
     try {
-        const { currentUser } = await ServerAuth(req, res);
+        const { currentUser } = await serverAuth(req, res);
 
         return res.status(200).json(currentUser);
 

@@ -4,7 +4,7 @@ import { BiArrowBack } from "react-icons/bi";
 
 //set up interface for header props. Some are optional.
 interface HeaderProps {
-    label: string
+    label: string;
     showBackArrow?: boolean;
 }
 
@@ -33,7 +33,9 @@ const Header: React.FC<HeaderProps> = ({ label, showBackArrow }) => {
                         />
                     )
                 }
-                <h1 className="text-white text-xl font-semibold">{label}</h1>
+                <h1 className="text-white text-xl font-semibold">
+                    {label}
+                    </h1>
             </div>
         </div>
     );
